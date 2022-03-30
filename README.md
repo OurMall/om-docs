@@ -37,3 +37,9 @@ Las funcionalidades principales que tendrán a disposición los clientes se desc
 4. **Consumo de servicios:** acceso a los servicios que ofrece los espacios de trabajo, compra en línea de productos.
 
 ### [Observaciones](#notes) ###
+
+- Los servicios ofrecidos por la plataforma son 100% gratis.
+- No es necesario el registro del usuario para consumir parte de las funcionalidades que ofrecemos, como visualizar los espacios de trabajo creados.
+- Para poder registrar un espacio de trabajo, se tendran en cuenta ciertas validaciones para verificar que el usuario en cuestión es mayor de edad.
+- No podrán haber espacios de trabajo que se dedicen al comercio de elementos ilegales como: armas, drogas, etc.
+- Nos reservamos el derecho de cerrar un espacio de trabajo en caso de no cumplir con las normativas establecidas.
