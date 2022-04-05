@@ -37,4 +37,11 @@ Los requisitos funcionales definen las funciones explicitas que tendrá el siste
 
 ## Requisitos no funcionales ##
 
-Redacción...
+Los requisitos no funcionales representan la interaccion implicita que tendra el sistema con los usuarios asociados al mismo.
+
+- El sistema debera actuar de forma optima a la creacion de multiples espacios de trabajos soportando la diferentes cargas que puedan establecer los mismos.
+- La interfaz grafica del aplicativo debera ser adaptativa a una pantalla de celular (diseño responsive).
+- El sistema debera proveer una ayuda acerca del funcionamiento de la plataforma.
+- Se implementaran metodologias agiles para el desarrollo del sistema de informacion, asignando los roles de SCRUM.
+- El sistema sera ejecutado en el navegador web y debera ser soportado por cualquier navegador que lo soporte.
+- El sistema debera permitir cambiar entre tema oscuro y claro como minima experiencia de usuario.
