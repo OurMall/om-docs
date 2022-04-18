@@ -41,10 +41,12 @@ Las funcionalidades principales que tendrán a disposición los clientes se desc
 - Para poder registrar un espacio de trabajo, se tendran en cuenta ciertas validaciones para verificar que el usuario en cuestión es mayor de edad.
 - No podrán haber espacios de trabajo que se dedicen al comercio de elementos ilegales como: armas, drogas, etc.
 - Nos reservamos el derecho de cerrar un espacio de trabajo en caso de no cumplir con las normativas establecidas.
+- Restringimos la creacion de espacios de trabajo a solo uno (1) por usuario, de esta forma se evita el monopolio.
+- La creacion de multiples cuentas para crear espacios de trabajo asociados puede ser motivo de bloqueo para el usuario y los espacios de trabajo infiltrados.
 
 ## [Metricas de desarrollo](#metricas-de-desarrollo) ##
 
-Las metricas de desarrollo expresan las reglas semanticas a nivel de codigo y documentos que deberan seguir los desarrollos para un correcto manejo de los estandares de calidad y buenas practicas.
+Las metricas de desarrollo expresan las reglas semanticas a nivel de codigo y documentos que deberan seguir los desarrolladores para un correcto manejo de los estandares de calidad y buenas practicas.
 
 A continuación se declaran las métricas a tener en cuenta una vez se comience con el desarrollo del proyecto, estás a su vez, irán regidas por ciertas reglas y estándares de código, entre otros.
 
