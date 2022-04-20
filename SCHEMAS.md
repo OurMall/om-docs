@@ -109,18 +109,42 @@ Formato:
     user_id: string,
     client_id: string,
     client_secret: string,
-    name: string,
-    type: string, //Web, desktop, etc
-    uri: string,
-    contacts: string[],
-    logo_uri: string,
-    policy_uri: string,
-    terms_uri: string
     redirect_uris: string[],
+    response_types: string[],
+    grant_types: string[],
+    application_type: string,
+    contact: string,
+    client_name: string,
+    logo_uri: string,
+    client_uri: string,
+    policy_uri: string,
+    tos_uri: string,
+    jwks_uri: string,
+    subject_type: string,
+    default_max_age: number,
     is_disabled: boolean,
     created_at: number
 }
 ```
+
+- **user_id:** Usuario/desarrollador propietario del cliente/aplicacion.
+- **client_id:** Identificador unico generado por la plataforma con el cual las aplicaciones se identificaran para la autorizacion.
+- **client_secret:** Pareja identificadora del **client_id**, representa una especie de "contrase&ntilde;a" para el cliente
+- **redirect_uris:** Lista de URI's para el redireccionamiento una vez se complete la autorizacion.
+- **response_types:** El tipo de respuesta que espera recibir el cliente. Por ahora se implementa &uacute;nicamente `code`
+- **grant_types:** El tipo de flujo al que se le autoriza acceder al cliente. Inicialmente solo se implementa `authorization_code`
+- **application_type:** El tipo de aplicaci&oacute;n que desea implementar la autenticacion. Se definen unicamente dos `native` & `web`
+- **contact:** Email de contacto de la organizacion/usuario due&ntilde;o de la aplicaci&oacute;n.
+- **client_name:** Nombre oficial del cliente que desea consumir los servicios.
+- **logo_uri:** URI del alojamiento del logotipo de la aplicaci&oacute;n
+- **client_uri:** URI del dominio oficial de la aplicaci&oacute;n. No puede contener fragmentos, parametros de consulta ni algo por el estilo.
+- **policy_uri:** URI de las politicas que ofrece el cliente consumidor.
+- **tos_uri:** URI de los terminos del servicio que ofrece el cliente consumidor.
+- **jwks_uri:** URL del documento para el conjunto de JSON Web Key que maneja el cliente.
+- **subject_type:** Tipo de cliente dependiendo de como es capaz de manejar sus credenciales. Se definen dos tipos `confidential/pairwise` & `public`
+- **default_max_age:** Tiempo por defecto que durar&aacute; la autenticaci&oacute;n. Se establece por defecto 10 d&iacute;as
+- **is_disabled:** Estado en el que se encuentra el cliente.
+- **created_at:** Fecha de creaci&oacute;n estampado en el cual se creo el cliente.
 
 ### Tokens - tokens ###
 
