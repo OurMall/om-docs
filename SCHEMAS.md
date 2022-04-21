@@ -27,7 +27,7 @@ Formato:
     middle_name: string,
     nickname: string,
     preferred_username: string,
-    gender: string, // M, F, O
+    gender: string,
     email: string,
     password: string,
     phone_number: string,
@@ -42,7 +42,8 @@ Formato:
     updated_at: number,
     permissions: Permissions[],
     groups: Groups[],
-    clients: Clients[]
+    clients: Clients[],
+    favorites: Products[]
 }
 ```
 
@@ -67,7 +68,8 @@ Formato:
 - **updated_at:** Ultima fecha de actualizacion de la cuenta del usuario.  
 - **permissions:** Permisos que posee el usuario.  
 - **groups:** Grupos a los que hace parte el usuario.  
-- **clients:** Clientes registrados para la comunicacion de la API por el usuario.  
+- **clients:** Clientes registrados para la comunicacion de la API por el usuario.
+- **favorites:** Lista de productos favoritos que tiene el usuario.
 
 ### Users Profiles - users_profiles ###
 
@@ -221,9 +223,11 @@ Formato:
 ```
 
 - **owner_id:** Usuario propietario del espacio de trabajo.  
-- **categorie_id:** Id de la categoria a la que hace parte el espacio de trabajo.  
-- **services:** Servicios con los que cuenta el espacio de trabajo.  
-- **members:** Miembros que hacen parte del espacio de trabajo.  
+- **categorie_id:** Id de la categoria a la que hace parte el espacio de trabajo.
+- **tags:** Etiquetas asociadas al espacio de trabajo. Por ejemplo: ropa-de-marca, vestidos, mujer, hombre, etc.
+- **services:** Lista de servicios habilitados con los que cuenta el espacio de trabajo.  
+- **suscribers:** Lista de miembros que hacen parte del espacio de trabajo o se han suscrito.
+- **products:** Lista de productos que hacen parte del espacio de trabajo.
 - **created_at:** Fecha o estampa de tiempo en el que se creo el espacio de trabajo.  
 
 ### Workspaces Profiles - workspaces_profiles ###
@@ -231,13 +235,13 @@ Formato:
 ```js
 {
     _id: string,
-    workspace_id: string, // Workspace
+    workspace_id: string,
     name: string,
     description: string,
     slogan: string,
     logo: string,
     background_color: string,
-    images: string[], // photos, pictures
+    images: string[], 
     social_media: string[],
     address: {
         formatted: string,
@@ -276,6 +280,9 @@ Formato:
 }
 ```
 
+- **name:** Nombre del servicio que va a poder integrar el espacio de trabajo.
+- **activate:** Estado del espacio
+
 ### Products - products ###
 
 ```js
@@ -291,8 +298,51 @@ Formato:
     vat: number,
     stock: number,
     images: string[],
+    status: string, // nuevo, usado, reacoplado
+    is_available: boolean, // disponible, no disponible
+    questions: Questions[]
 }
 ```
+
+- **workspace_id:** Espacio de trabajo al que se asocia el producto.
+- **name:** Nombre o titulo del prodcuto
+- **detail:** Detalle extenso para cada producto
+- **price:** Detalles del precio del producto
+    - **value:** Valor del precio del producto
+    - **currency:** Moneda del valor del producto
+- **vat:** IVA relacionado al producto
+- **stock:** Cantidad disponible del producto.
+- **images:** Lista de imagenes relacionadas del producto
+- **status:** En que estado se encuentra el producto. Por ejemplo: nuevo, usado, reacondicionado.
+- **is_available:** Disponibilidad del producto: Por ejemplo: disponible o no disponible.
+- **questions**: Lista de preguntas realizadas para el producto
+
+### Questions - questions ###
+
+```js
+{
+    _id: string,
+    product_id: string,
+    user_id: string,
+    value: string,
+    responses: Responses[
+        {
+            _id: string,
+            value: string,
+            timestamp: number
+        }
+    ],
+    created_at: number
+}
+```
+
+- **product_id:** Producto al que hace parte la pregunta.
+- **user_id:** Usuario que realizo la pregunta
+- **value:** Escrito o valor textual de la pregunta.
+- **responses:** Lista de respuestas de la pregunta.
+    - **value:** Escrito o valor textual de la respuesta.
+    - **timestamp:** Estampa de tiempo en el que se realizo la respuesta.
+- **created_at:** Fecha de creacion de la pregunta.
 
 ### Invoices - invoices ###
 
@@ -300,7 +350,9 @@ Formato:
 {
     _id: string,
     user_id: string,
-    product_id: 
+    product_id: string,
+    date: number,
+    created_at: number
 }
 ```
 
@@ -308,7 +360,8 @@ Formato:
 
 ```js
 {
-
+    _id: string,
+    invoice_id: string,
 }
 ```
 
