@@ -212,12 +212,13 @@ Formato:
 ```js
 {
     _id: string,
-    owner_id: string, //User
-    categorie_id: string, //Categorie
+    owner_id: string,
+    categorie_id: string,
     tags: string[],
     services: Services[],
     suscribers: Users[],
     products: Products[],
+    notifications: Notifications[],
     created_at: number
 }
 ```
@@ -228,6 +229,7 @@ Formato:
 - **services:** Lista de servicios habilitados con los que cuenta el espacio de trabajo.  
 - **suscribers:** Lista de miembros que hacen parte del espacio de trabajo o se han suscrito.
 - **products:** Lista de productos que hacen parte del espacio de trabajo.
+- **notifications:** Lista de notificaciones que posee el espacio de trabajo.
 - **created_at:** Fecha o estampa de tiempo en el que se creo el espacio de trabajo.  
 
 ### Workspaces Profiles - workspaces_profiles ###
@@ -275,8 +277,8 @@ Formato:
 ```js
 {
     _id: string,
-    name: string,
-    activate: boolean
+    name: string, // vitrina de productos
+    activate: boolean // false, true
 }
 ```
 
@@ -298,9 +300,10 @@ Formato:
     vat: number,
     stock: number,
     images: string[],
-    status: string, // nuevo, usado, reacoplado
-    is_available: boolean, // disponible, no disponible
-    questions: Questions[]
+    status: string,
+    is_available: boolean,
+    questions: Questions[],
+    created_at: number
 }
 ```
 
@@ -308,14 +311,15 @@ Formato:
 - **name:** Nombre o titulo del prodcuto
 - **detail:** Detalle extenso para cada producto
 - **price:** Detalles del precio del producto
-    - **value:** Valor del precio del producto
-    - **currency:** Moneda del valor del producto
+  - **value:** Valor del precio del producto
+  - **currency:** Moneda del valor del producto
 - **vat:** IVA relacionado al producto
 - **stock:** Cantidad disponible del producto.
 - **images:** Lista de imagenes relacionadas del producto
 - **status:** En que estado se encuentra el producto. Por ejemplo: nuevo, usado, reacondicionado.
 - **is_available:** Disponibilidad del producto: Por ejemplo: disponible o no disponible.
 - **questions**: Lista de preguntas realizadas para el producto
+- **created_at:** Fecha de creacion para cada producto
 
 ### Questions - questions ###
 
@@ -340,8 +344,8 @@ Formato:
 - **user_id:** Usuario que realizo la pregunta
 - **value:** Escrito o valor textual de la pregunta.
 - **responses:** Lista de respuestas de la pregunta.
-    - **value:** Escrito o valor textual de la respuesta.
-    - **timestamp:** Estampa de tiempo en el que se realizo la respuesta.
+  - **value:** Escrito o valor textual de la respuesta.
+  - **timestamp:** Estampa de tiempo en el que se realizo la respuesta.
 - **created_at:** Fecha de creacion de la pregunta.
 
 ### Invoices - invoices ###
@@ -349,12 +353,34 @@ Formato:
 ```js
 {
     _id: string,
+    code: string,
     user_id: string,
-    product_id: string,
+    workspace_id: string,
+    invoices_details: InvoicesDetails[],
+    payment_method: {
+        name: string,
+        type: string, 
+        currency: string
+    },
+    total_vat: number,
+    total_price: number,
+    total_amount: number,
     date: number,
-    created_at: number
+    created_at: number,
 }
 ```
+
+- **code:** Codigo generado de la factura
+- **user_id:** Usuario propietario o al cual se le efectiva la factura.
+- **workspace_id:** Espacio de trabajo al que hace parte la factura.
+- **invoices_details:** Lista de los detalles de la factura en los cuales se encuentran el o los productos transaccionados.
+- **payment_method:** Conjunto del metodo de pago
+  - **name:** Nombre del tipo de pago. Por ejemplo: efectivo, tarjeta
+- **total_vat:** Valor total del iva
+- **total_price:** Precio total sin IVA
+- **total_amout:** Costo total con el IVA incluido
+- **date:** Fecha en la cual se transacciona la factura.
+- **created_at:** Fecha en la cual se crea la factura.
 
 ### Invoices Details - Invoices ###
 
@@ -362,14 +388,20 @@ Formato:
 {
     _id: string,
     invoice_id: string,
+    product_id: string,
+    number: string,
 }
 ```
+
+- **invoice_id:** Factura a la cual pertenecen los detalles
+- **product_id:** ID del proyecto que se facturo
+- **number:** Cantidad de productos que se asociaron a la factura.
 
 ### System Cash - system_cash ###
 
 ```js
 {
-    field: type,
+    _id: string,
 }
 ```
 
@@ -388,12 +420,21 @@ Formato:
 }
 ```
 
+- **title:** Titulo o nombre de la notificacion
+- **image:** Imagen representativa que decora la notificacion
+- **link:** Enlace a donde redigira la notificacion.
+- **description:** Breve descripcion relacionada en que se basa la notificacion.
+- **is_active:** Estado de la notificacion
+- **created_at:** Fecha en la que se creo la notificacion
+- **expired_at:** Fecha de vigencia de la notificacion
+
 ### Rooms - rooms ###
 
 ```js
 {
     _id: string,
-    owner_id: string, // User
+    owner_id: string,
+    room_details: RoomDetails[],
     name: string,
     description: string,
     is_disabled: boolean,
@@ -402,14 +443,26 @@ Formato:
 }
 ```
 
+- **owner_id:** Usuario creador de la sala de soporte.
+- **name:** Nombre de la sala de soporte
+- **description:** Descripcion breve relacionada a la sala de soporte
+- **is_disabled:** Estado de la sala de soporte
+- **capacity:** Capacidad de usuarios de la sala de soporte
+- **created_at:** Fecha de creacion de la sala de soporte
+
 ### Rooms Details - rooms_details ###
 
 ```js
 {
     _id: string,
-    room_id: string, // Room
-    user_id: string, // User
+    room_id: string,
+    user_id: string,
     message: string,
     timestamp: number
 }
 ```
+
+- **room_id:** Sala de soporte a la que hacen parte los detalles.
+- **user_id:** Usuario que interactua con la sala de soporte.
+- **message:** Mensaje enviado por el usuario a la sala de soporte.
+- **timestamp:** Estampa de tiempo en el que se envio el mensaje.
