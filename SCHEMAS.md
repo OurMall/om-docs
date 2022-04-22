@@ -277,8 +277,8 @@ Formato:
 ```js
 {
     _id: string,
-    name: string, // vitrina de productos
-    activate: boolean // false, true
+    name: string,
+    activate: boolean
 }
 ```
 
@@ -389,7 +389,7 @@ Formato:
     _id: string,
     invoice_id: string,
     product_id: string,
-    number: string,
+    number: number,
 }
 ```
 
@@ -397,13 +397,37 @@ Formato:
 - **product_id:** ID del proyecto que se facturo
 - **number:** Cantidad de productos que se asociaron a la factura.
 
-### System Cash - system_cash ###
+### Cash Register - cash_register ###
 
 ```js
 {
     _id: string,
+    workspace_id: string,
+    cash_register_details: CashRegisterDetails[],
+    accumulate: number,
 }
 ```
+
+- **workspace_id:** Espacio de trabajo al que pertenece la caja de registro
+- **cash_register_details:** Lista de detalles de la caja de registro.
+- **accumulate:** Dinero acumulado por cada transaccion con el sistema de caja.
+
+### Cash Registers Details - cash_register_details ###
+
+```js
+{
+    _id: string,
+    cash_register: string,
+    product_id: string,
+    number: number,
+    registered_at: number
+}
+```
+
+- **cash_register:** Caja registradora a la que pertenecen los detalles.
+- **product_id:** Producto asociado al detalle de la caja registradora.
+- **number:** Numero de productos asociado al espacio de trabajo.
+- **registered_at:** Fecha en la que se hizo el registro de la caja.
 
 ### Notifications - notifications ###
 
@@ -466,3 +490,11 @@ Formato:
 - **user_id:** Usuario que interactua con la sala de soporte.
 - **message:** Mensaje enviado por el usuario a la sala de soporte.
 - **timestamp:** Estampa de tiempo en el que se envio el mensaje.
+
+### Tickets - tickets ###
+
+```js
+{
+
+}
+```
