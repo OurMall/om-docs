@@ -10,7 +10,10 @@ Formato:
 
 ```js
 {
-    field1: type
+    field1: type,
+    field2: type,
+    field3: type,
+    field4: type
 }
 ```
 
